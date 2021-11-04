@@ -39,44 +39,48 @@
 ;; colemak configured
 
 ;; undo
-(define-key evil-normal-state-map "l" 'evil-undo)
+(map! :m "l" nil
+      :n "l" 'evil-undo)
 
 ;; insert 
-(define-key evil-normal-state-map "k" 'evil-insert)
-(define-key evil-normal-state-map "K" 'evil-insert-line)
-(define-key evil-visual-state-map "k" evil-inner-text-objects-map)
-(define-key evil-visual-state-map "K" 'evil-insert)
+(map!   :m "k" nil
+        :m "K" nil
+        :n "k" 'evil-insert
+        :n "K" 'evil-insert-line
+        :v "k" evil-inner-text-objects-map
+        :v "K" 'evil-insert)
 
 ;; unei for hjkl
-(define-key evil-normal-state-map "u" nil)
-(define-key evil-normal-state-map "n" nil) 
-(define-key evil-normal-state-map "e" nil)
-(define-key evil-normal-state-map "i" nil) 
-(define-key evil-normal-state-map "N" nil)
-(define-key evil-normal-state-map "I" nil)
-(define-key evil-motion-state-map "e" 'evil-next-visual-line)
-(define-key evil-motion-state-map "u" 'evil-previous-visual-line)
-(define-key evil-motion-state-map "n" 'evil-backward-char)
-(define-key evil-motion-state-map "i" 'evil-forward-char)
-(define-key evil-motion-state-map "I" 'evil-end-of-line)
-(define-key evil-motion-state-map "N" 'evil-beginning-of-line)
-(define-key evil-visual-state-map "e" 'evil-next-visual-line)
-(define-key evil-visual-state-map "u" 'evil-previous-visual-line)
-(define-key evil-visual-state-map "n" 'evil-backward-char)
-(define-key evil-visual-state-map "i" 'evil-forward-char)
+(map!   :m "n" nil
+        :m "e" nil
+        :nv "u" nil
+        :nv "i" nil
+        :m "N" nil
+        :m "E" nil
+        :nv "U" nil
+        :nv "I" nil
+        :m "e" 'evil-next-visual-line
+      :m "u" 'evil-previous-visual-line
+      :m "n" 'evil-backward-char
+      :m "i" 'evil-forward-char
+      :m "I" 'evil-end-of-line
+      :m "N" 'evil-beginning-of-line
+      :v "e" 'evil-next-visual-line
+      :v "u" 'evil-previous-visual-line
+      :v "n" 'evil-backward-char
+      :v "i" 'evil-forward-char)
 
-;; searsh
-(define-key evil-motion-state-map "h" 'evil-search-next)
-(define-key evil-motion-state-map "H" 'evil-search-previous)
-
-(define-key evil-normal-state-map "j" nil)
-(define-key evil-normal-state-map "J" nil) 
-(define-key evil-motion-state-map "j" 'evil-forward-word-end)
-(define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
-)
+;; searsh and jump
+(map!   :m "h" nil
+        :m "j" nil
+        :m "H" nil
+        :m "J" nil
+        :m "h" 'evil-search-next
+        :m "H" 'evil-search-previous
+        :m "j" 'evil-forward-word-end
+        :m "J" 'evil-forward-WORD-end)
 
 ;; window manage
-(define-prefix-command 'evil-window-map)
 (define-key evil-window-map "b" 'evil-window-bottom-right)
 (define-key evil-window-map "c" 'evil-window-delete)
 (define-key evil-window-map "n" 'evil-window-left);;h
@@ -124,7 +128,7 @@
 (define-key evil-window-map "\C-w" 'evil-window-next)
 (define-key evil-window-map (kbd "C-S-W") 'evil-window-prev)
 (define-key evil-window-map "\C-_" 'evil-window-set-height)
-(define-key evil-window-map "\C-f" 'ffap-other-window)
+(define-key evil-window-map "\C-f" 'ffap-other-window))
 (colemak-config)
 
 
