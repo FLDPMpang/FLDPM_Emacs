@@ -19,8 +19,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
- (setq doom-font (font-spec :family "CodeNewRoman Nerd Font Mono" :size 16 :weight 'normal)
-       doom-variable-pitch-font (font-spec :family "CodeNewRoman Nerd Font Mono" :size 16))
+(setq doom-font (font-spec :family "CodeNewRoman Nerd Font Mono" :size 22))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -34,14 +33,12 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (defun colemak-config ()
 ;; colemak configured
-;; Save and quit
-(define-key evil-normal-state-map "S" 'evil-write)
 
-;; undo 
+;; undo
 (define-key evil-normal-state-map "l" 'evil-undo)
 
 ;; insert 
@@ -56,7 +53,7 @@
 (define-key evil-normal-state-map "e" nil)
 (define-key evil-normal-state-map "i" nil) 
 (define-key evil-normal-state-map "N" nil)
-(define-key evil-normal-state-map "I" nil) 
+(define-key evil-normal-state-map "I" nil)
 (define-key evil-motion-state-map "e" 'evil-next-visual-line)
 (define-key evil-motion-state-map "u" 'evil-previous-visual-line)
 (define-key evil-motion-state-map "n" 'evil-backward-char)
@@ -69,28 +66,65 @@
 (define-key evil-visual-state-map "i" 'evil-forward-char)
 
 ;; searsh
-(define-key evil-normal-state-map "=" nil)
-(define-key evil-normal-state-map "-" nil) 
-(define-key evil-motion-state-map "=" 'evil-search-next)
-(define-key evil-motion-state-map "-" 'evil-search-previous)
+(define-key evil-motion-state-map "h" 'evil-search-next)
+(define-key evil-motion-state-map "H" 'evil-search-previous)
 
 (define-key evil-normal-state-map "j" nil)
 (define-key evil-normal-state-map "J" nil) 
 (define-key evil-motion-state-map "j" 'evil-forward-word-end)
 (define-key evil-motion-state-map "J" 'evil-forward-WORD-end)
+)
 
 ;; window manage
 (define-prefix-command 'evil-window-map)
-(define-key evil-window-map "n" 'evil-window-left)
+(define-key evil-window-map "b" 'evil-window-bottom-right)
+(define-key evil-window-map "c" 'evil-window-delete)
+(define-key evil-window-map "n" 'evil-window-left);;h
 (define-key evil-window-map "N" 'evil-window-move-far-left)
-(define-key evil-window-map "e" 'evil-window-down)
+(define-key evil-window-map "e" 'evil-window-down);;j
 (define-key evil-window-map "E" 'evil-window-move-very-bottom)
-(define-key evil-window-map "u" 'evil-window-up)
+(define-key evil-window-map "u" 'evil-window-up);;k
 (define-key evil-window-map "U" 'evil-window-move-very-top)
-(define-key evil-window-map "i" 'evil-window-right)
+(define-key evil-window-map "i" 'evil-window-right);;l
 (define-key evil-window-map "I" 'evil-window-move-far-right)
-)
-
+(define-key evil-window-map "h" 'evil-window-new)
+(define-key evil-window-map "o" 'delete-other-windows)
+(define-key evil-window-map "p" 'evil-window-mru)
+(define-key evil-window-map "q" 'evil-quit)
+(define-key evil-window-map "r" 'evil-window-rotate-downwards)
+(define-key evil-window-map "R" 'evil-window-rotate-upwards)
+(define-key evil-window-map "s" 'evil-window-split)
+(define-key evil-window-map "S" 'evil-window-split)
+(define-key evil-window-map "t" 'evil-window-top-left)
+(define-key evil-window-map "v" 'evil-window-vsplit)
+(define-key evil-window-map "w" 'evil-window-next)
+(define-key evil-window-map "W" 'evil-window-prev)
+(define-key evil-window-map "+" 'evil-window-increase-height)
+(define-key evil-window-map "-" 'evil-window-decrease-height)
+(define-key evil-window-map "_" 'evil-window-set-height)
+(define-key evil-window-map "<" 'evil-window-decrease-width)
+(define-key evil-window-map ">" 'evil-window-increase-width)
+(define-key evil-window-map "=" 'balance-windows)
+(define-key evil-window-map "|" 'evil-window-set-width)
+(define-key evil-window-map "\C-b" 'evil-window-bottom-right)
+(define-key evil-window-map "\C-c" 'evil-window-delete)
+(define-key evil-window-map (kbd "C-S-h") 'evil-window-move-far-left)
+(define-key evil-window-map (kbd "C-S-j") 'evil-window-move-very-bottom)
+(define-key evil-window-map (kbd "C-S-k") 'evil-window-move-very-top)
+(define-key evil-window-map (kbd "C-S-l") 'evil-window-move-far-right)
+(define-key evil-window-map "\C-n" 'evil-window-new)
+(define-key evil-window-map "\C-o" 'delete-other-windows)
+(define-key evil-window-map "\C-p" 'evil-window-mru)
+(define-key evil-window-map "\C-r" 'evil-window-rotate-downwards)
+(define-key evil-window-map (kbd "C-S-r") 'evil-window-rotate-upwards)
+(define-key evil-window-map "\C-s" 'evil-window-split)
+(define-key evil-window-map (kbd "C-S-s") 'evil-window-split)
+(define-key evil-window-map "\C-t" 'evil-window-top-left)
+(define-key evil-window-map "\C-v" 'evil-window-vsplit)
+(define-key evil-window-map "\C-w" 'evil-window-next)
+(define-key evil-window-map (kbd "C-S-W") 'evil-window-prev)
+(define-key evil-window-map "\C-_" 'evil-window-set-height)
+(define-key evil-window-map "\C-f" 'ffap-other-window)
 (colemak-config)
 
 
