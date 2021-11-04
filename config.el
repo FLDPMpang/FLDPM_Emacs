@@ -33,12 +33,7 @@
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
-
-;; Maximize Emacs on startup
-(add-to-list 'initial-frame-alist 'maximized)
-
-;; Disable smartparens/automatic parentheses completion
-(remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+(add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (defun colemak-config ()
 ;; colemak configured
@@ -56,24 +51,24 @@
         :v "K" 'evil-insert)
 
 ;; unei for hjkl
-(map! :m  "n" nil
-      :m  "e" nil
-      :nv "u" nil
-      :nv "i" nil
-      :m  "N" nil
-      :m  "E" nil
-      :nv "U" nil
-      :nv "I" nil
-      :m  "e" 'evil-next-visual-line
-      :m  "u" 'evil-previous-visual-line
-      :m  "n" 'evil-backward-char
-      :m  "i" 'evil-forward-char
-      :m  "I" 'evil-end-of-line
-      :m  "N" 'evil-beginning-of-line
-      :v  "e" 'evil-next-visual-line
-      :v  "u" 'evil-previous-visual-line
-      :v  "n" 'evil-backward-char
-      :v  "i" 'evil-forward-char)
+(map!   :m "n" nil
+        :m "e" nil
+        :nv "u" nil
+        :nv "i" nil
+        :m "N" nil
+        :m "E" nil
+        :nv "U" nil
+        :nv "I" nil
+        :m "e" 'evil-next-visual-line
+      :m "u" 'evil-previous-visual-line
+      :m "n" 'evil-backward-char
+      :m "i" 'evil-forward-char
+      :m "I" 'evil-end-of-line
+      :m "N" 'evil-beginning-of-line
+      :v "e" 'evil-next-visual-line
+      :v "u" 'evil-previous-visual-line
+      :v "n" 'evil-backward-char
+      :v "i" 'evil-forward-char)
 
 ;; searsh and jump
 (map!   :m "h" nil
