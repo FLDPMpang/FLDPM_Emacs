@@ -82,6 +82,7 @@
           :m "j" 'evil-forward-word-end
           :m "J" 'evil-forward-WORD-end)
 
+
   ;; window manage
   (define-key evil-window-map "b" 'evil-window-bottom-right)
   (define-key evil-window-map "c" 'evil-window-delete)
