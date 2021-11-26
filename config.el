@@ -49,10 +49,14 @@
   ;; insert
   (map!   :m "k" nil
           :m "K" nil
+          :m "h" nil
+          :m "H" nil
           :n "k" 'evil-insert
           :n "K" 'evil-insert-line
           :v "k" evil-inner-text-objects-map
-          :v "K" 'evil-insert)
+          :v "K" 'evil-insert
+          :m "h" 'evil-search-next
+          :m "H" 'evil-search-previous)
   ;; unei for hjkl
   (map!   :m "n" nil
           :m "e" nil
@@ -81,6 +85,7 @@
           :m "H" 'evil-search-previous
           :m "j" 'evil-forward-word-end
           :m "J" 'evil-forward-WORD-end)
+
 
 
   ;; window manage
