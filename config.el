@@ -41,23 +41,21 @@
 ;; (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
 
 
+
 ;; colemak configured
 (defun colemak-config ()
+  ;; Unbinds
   ;; undo
   (map! :m "l" nil
         :n "l" 'evil-undo)
   ;; insert
   (map!   :m "k" nil
           :m "K" nil
-          :m "h" nil
-          :m "H" nil
           :n "k" 'evil-insert
           :n "K" 'evil-insert-line
           :v "k" evil-inner-text-objects-map
-          :v "K" 'evil-insert
-          :m "h" 'evil-search-next
-          :m "H" 'evil-search-previous)
-  ;; unei for hjkl
+          :v "K" 'evil-insert)
+  ;; noremal and visual
   (map!   :m "n" nil
           :m "e" nil
           :nv "u" nil
@@ -66,26 +64,68 @@
           :m "E" nil
           :nv "U" nil
           :nv "I" nil
+          :v "e" 'evil-next-visual-line
+          :v "u" 'evil-previous-visual-line
+          :v "n" 'evil-backward-char
+          :v "i" 'evil-forward-char)
+  ;; motion
+  (map!   :m "h" nil
+          :m "j" nil
+          :m "H" nil
+          :m "J" nil
+          :m "ge" nil
+          :m "gE" nil
+          :m "gj" nil
+          :m "gJ" nil
+          :m "gj" 'evil-backward-word-end
+          :m "gJ" 'evil-backward-WORD-end
+          :m "gE" 'evil-previous-visual-line
+          :m "ge" 'evil-next-visual-line
           :m "e" 'evil-next-visual-line
           :m "u" 'evil-previous-visual-line
           :m "n" 'evil-backward-char
           :m "i" 'evil-forward-char
           :m "I" 'evil-end-of-line
           :m "N" 'evil-beginning-of-line
-          :v "e" 'evil-next-visual-line
-          :v "u" 'evil-previous-visual-line
-          :v "n" 'evil-backward-char
-          :v "i" 'evil-forward-char)
-  ;; searsh and jump
-  (map!   :m "h" nil
-          :m "j" nil
-          :m "H" nil
-          :m "J" nil
-          :m "h" 'evil-search-next
-          :m "H" 'evil-search-previous
+          :m "h" 'evil-ex-search-next
+          :m "H" 'evil-ex-search-previous
           :m "j" 'evil-forward-word-end
           :m "J" 'evil-forward-WORD-end)
 
+  ;; Operator-Pending statea
+  (define-key evil-operator-state-map "i" nil)
+
+  (map! :n "q" #'quit-window
+        :n "v" #'evil-visual-char
+        :nv "e" #'dired-next-line
+        :nv "u" #'dired-previous-line
+        :n "h" #'dired-up-directory
+        :n "l" #'dired-find-file
+        :n "#" #'dired-flag-auto-save-files
+        :n "." #'evil-repeat
+        :n "~" #'dired-flag-backup-files
+        ;; Comparison commands
+        :n "=" #'dired-diff
+        :n "|" #'dired-compare-directories
+        ;; move to marked files
+        :m "[m" #'dired-prev-marked-file
+        :m "]m" #'dired-next-marked-file
+        :m "[d" #'dired-prev-dirline
+        :m "]d" #'dired-next-dirline
+        ;; Lower keys for commands not operating on all the marked files
+        :desc "wdired" :n "w" #'wdired-change-to-wdired-mode
+        :n "a" #'dired-find-alternate-file
+        :nv "d" #'dired-flag-file-deletion
+        :n "K" #'dired-do-kill-lines
+        :n "r" #'dired-do-redisplay
+        :nv "m" #'dired-mark
+        :nv "t" #'dired-toggle-marks
+        :nv "k" #'dired-unmark           ; also "*u"
+        :nv "p" #'dired-unmark-backward
+        :n "+" #'dired-create-directory
+        :n "$" #'dired-hide-details-mode
+        :n "U" #'dired-undo
+        )
 
 
   ;; window manage
