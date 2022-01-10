@@ -95,37 +95,6 @@
   ;; Operator-Pending statea
   (define-key evil-operator-state-map "i" nil)
 
-  (map! :n "q" #'quit-window
-        :n "v" #'evil-visual-char
-        :nv "e" #'dired-next-line
-        :nv "u" #'dired-previous-line
-        :n "h" #'dired-up-directory
-        :n "l" #'dired-find-file
-        :n "#" #'dired-flag-auto-save-files
-        :n "." #'evil-repeat
-        :n "~" #'dired-flag-backup-files
-        ;; Comparison commands
-        :n "=" #'dired-diff
-        :n "|" #'dired-compare-directories
-        ;; move to marked files
-        :m "[m" #'dired-prev-marked-file
-        :m "]m" #'dired-next-marked-file
-        :m "[d" #'dired-prev-dirline
-        :m "]d" #'dired-next-dirline
-        ;; Lower keys for commands not operating on all the marked files
-        :desc "wdired" :n "w" #'wdired-change-to-wdired-mode
-        :n "a" #'dired-find-alternate-file
-        :nv "d" #'dired-flag-file-deletion
-        :n "K" #'dired-do-kill-lines
-        :n "r" #'dired-do-redisplay
-        :nv "m" #'dired-mark
-        :nv "t" #'dired-toggle-marks
-        :nv "k" #'dired-unmark           ; also "*u"
-        :nv "p" #'dired-unmark-backward
-        :n "+" #'dired-create-directory
-        :n "$" #'dired-hide-details-mode
-        :n "U" #'dired-undo
-        )
 
 
   ;; window manage
