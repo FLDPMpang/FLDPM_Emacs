@@ -26,9 +26,6 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -39,6 +36,7 @@
 ;; (add-to-list 'initial-frame-alist 'fullboth)
 (add-hook 'window-setup-hook #'toggle-frame-maximized)
 ;; (remove-hook 'doom-first-buffer-hook #'smartparens-global-mode)
+
 
 
 
@@ -146,7 +144,10 @@
   (define-key evil-window-map (kbd "C-S-W") 'evil-window-prev)
   (define-key evil-window-map "\C-_" 'evil-window-set-height)
   (define-key evil-window-map "\C-f" 'ffap-other-window))
-(colemak-config)
+
+(after! evil
+  (colemak-config)
+  )
 
 
 ;; Here are some additional functions/macros that could help you configure Doom:
@@ -165,3 +166,25 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(after! org
+
+  ;; If you use `org' and don't want your org files in the default location below,
+  ;; change `org-directory'. It must be set before org loads!
+  (setq org-directory "~/org/")
+  (setq org-capture-templates nil)
+  (setq org-capture-templates '(
+                                ("t" "Task" entry (file+headline "~/org/task.org" "Task" )
+                                 "* TODO [#B] %i%? \nDEADLINE: %u " :empty-lines 1)
+                                ("s" "School" entry (file+headline "~/org/task.org" "School" )
+                                 "* TODO [#B] %i%? \nSCHEDULED: %U " :empty-lines 1)
+                                ("w" "Work" entry (file+headline "~/org/task.org" "Work" )
+                                 "* TODO [#B] %i%? \nSCHEDULED: %U " :empty-lines 1)
+                                ("p" "Project" entry (file "~/org/project.org" )
+                                 "* TODO  %i%?" :empty-lines 1)
+                                ("n" "Routine" entry (file "~/org/routine.org")
+                                 "* TODO [#C] %i%?" :empty-lines 1)
+                                ("a" "Plan" entry (file "~/org/plan.org")
+                                 "* TODO [#C] %i%?" :empty-lines 1)
+                                ))
+  )
